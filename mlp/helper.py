@@ -37,18 +37,25 @@ class Helper:
     def cross_validation(self):
         k_fold = 10
         validation = []
-
         for div in xrange(0, k_fold):
             array = []
             lenght = range(len(self.csv) / 10)
             for x in lenght:
                 array.append(self.csv[x + len(lenght) * div])
             validation.append(array)
-
         return validation
 
     def shuffle_csv_list(self):
         return random.shuffle(self.csv)
+
+    def add_out_neuron(self):
+        for elements in self.csv:
+            value = int(elements[self.attrs])
+            for x in range(self.classes):
+                if value == x+1:
+                    elements.append(1)
+                else:
+                    elements.append(0)
 
     def prepare_list(self):
         for idx in range(len(self.config)):
@@ -58,8 +65,8 @@ class Helper:
             self.attrs = self.config[idx][1]
             self.classes = self.config[idx][2]
             self.csv = self.load_csv_file()
-            print self.csv
             self.shuffle_csv_list()
+            self.add_out_neuron()
             self.validation = self.cross_validation()
 
             end = time.time()
