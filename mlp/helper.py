@@ -48,7 +48,7 @@ class Helper:
     def shuffle_csv_list(self):
         return random.shuffle(self.csv)
 
-    def add_out_neuron(self):
+    def add_output_neuron(self):
         for elements in self.csv:
             value = int(elements[self.attrs])
             for x in range(self.classes):
@@ -66,7 +66,7 @@ class Helper:
             self.classes = self.config[idx][2]
             self.csv = self.load_csv_file()
             self.shuffle_csv_list()
-            self.add_out_neuron()
+            self.add_output_neuron()
             self.validation = self.cross_validation()
 
             end = time.time()
